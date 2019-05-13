@@ -5,7 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import mainGame.states.MainScreenGameState;
+import mainGame.states.mainScreen.MainScreenGameState;
 
 public class MainGame extends StateBasedGame
 {
