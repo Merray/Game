@@ -27,10 +27,12 @@ public class ListeMenu
 
 	public void draw(Graphics g)
 	{
+
 		for (ElementADessiner element : liste)
 		{
 			element.draw(g);
 		}
+
 	}
 
 	public void next()

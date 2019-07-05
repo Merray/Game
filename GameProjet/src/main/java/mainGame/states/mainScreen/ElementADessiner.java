@@ -1,5 +1,6 @@
 package mainGame.states.mainScreen;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class ElementADessiner
@@ -31,9 +32,16 @@ public class ElementADessiner
 	{
 		if (selected)
 		{
-			g.drawRect(posX - 5, posY - 5, 200, 50);
+			g.setColor(Color.yellow);
+			g.drawRect(posX - 10, posY - 10, 180, 40);
+			g.drawString(texte, posX, posY);
+		} else
+		{
+			g.setColor(Color.white);
+			g.drawString(texte, posX, posY);
 		}
-		g.drawString(texte, posX, posY);
+
+		g.setColor(Color.white);
 	}
 
 	public String getTexte()

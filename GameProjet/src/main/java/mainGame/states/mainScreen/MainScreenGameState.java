@@ -46,10 +46,10 @@ public class MainScreenGameState extends BasicGameState
 		this.container = container;
 		this.game = game;
 		this.backgroundImage = new Image("backgroundImages/mainMenuBackground.png");
-		this.backgroundMusic = new Music("music/ArcadeGameMusic.ogg");
+		this.backgroundMusic = new Music("music/Strike the Earth.ogg");
 		this.selectionSound = new Sound("sounds/selection_sound.ogg");
-		this.validationSound = new Sound("sounds/validation_sound.ogg");
-		backgroundMusic.loop(1f, 0.1f);
+		this.validationSound = new Sound("sounds/Metal_Slug_Okay.ogg");
+		backgroundMusic.loop(1f, 0.2f);
 
 		try
 		{
@@ -72,7 +72,7 @@ public class MainScreenGameState extends BasicGameState
 
 		liste = new ListeMenu();
 		liste.ajouter(new ElementADessiner("New Game", 300, 450, true));
-		liste.ajouter(new ElementADessiner("Options", 325, 500, false));
+		liste.ajouter(new ElementADessiner(" Options  ", 300, 500, false));
 		liste.ajouter(new ElementADessiner("Leave Game", 300, 550, false));
 
 	}
@@ -86,7 +86,9 @@ public class MainScreenGameState extends BasicGameState
 		g.drawString("LE JEU : The Game", 125, 175);
 		g.setFont(font2);
 		g.setColor(Color.white);
-		g.drawString("Press P to pause or resume music", 150, 325);
+		g.drawString("Press P to pause or resume music", 150, 300);
+		g.drawString("Arrow keys to navigate", 220, 335);
+		g.drawString("Enter to confirm choice", 220, 370);
 
 		liste.draw(g);
 
@@ -113,7 +115,7 @@ public class MainScreenGameState extends BasicGameState
 			container.exit();
 			break;
 		case Input.KEY_ENTER:
-			validationSound.play(2f, 0.1f);
+			validationSound.play(1f, 0.3f);
 			if (liste.getListe().get(2).isSelected())
 			{
 				container.exit();
@@ -133,11 +135,11 @@ public class MainScreenGameState extends BasicGameState
 
 			break;
 		case Input.KEY_DOWN:
-			selectionSound.play(2f, 0.1f);
+			selectionSound.play(1f, 0.1f);
 			liste.next();
 			break;
 		case Input.KEY_UP:
-			selectionSound.play(2f, 0.1f);
+			selectionSound.play(1f, 0.1f);
 			liste.previous();
 			break;
 
