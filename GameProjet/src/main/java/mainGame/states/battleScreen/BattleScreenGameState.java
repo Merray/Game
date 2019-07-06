@@ -31,6 +31,8 @@ public class BattleScreenGameState extends BasicGameState
 
 	// Images/Sprites
 	private Image backgroundImage;
+	private Image enemy;
+	private Image perso;
 
 	// Sons/Musiques
 	private Music backgroundMusic;
@@ -47,6 +49,8 @@ public class BattleScreenGameState extends BasicGameState
 	{
 		this.container = container;
 		this.game = game;
+		this.enemy = new Image("sprites/gobelin.png").getScaledCopy(2.5f);
+		this.perso = new Image("sprites/perso.png").getScaledCopy(2.5f);
 		this.backgroundImage = new Image("backgroundImages/battleScreenBackground.jpg");
 		this.backgroundMusic = new Music("music/FFIX_Battle.ogg");
 
@@ -75,6 +79,8 @@ public class BattleScreenGameState extends BasicGameState
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
 	{
 		this.backgroundImage.draw(0, 0, container.getWidth(), container.getHeight());
+		this.enemy.drawCentered(container.getWidth() * 3 / 4, container.getHeight() / 2);
+		this.perso.drawCentered(container.getWidth() * 1 / 4, container.getHeight() / 2);
 
 		g.setColor(Color.white);
 		g.setFont(font2);
