@@ -16,7 +16,12 @@ import org.newdawn.slick.Sound;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.transition.Transition;
 import org.newdawn.slick.util.ResourceLoader;
+
+import mainGame.states.battleScreen.BattleScreenGameState;
 
 public class MainScreenGameState extends BasicGameState
 {
@@ -34,6 +39,10 @@ public class MainScreenGameState extends BasicGameState
 	private Sound selectionSound;
 	private Sound validationSound;
 
+	// Transitions
+	private Transition fadeOutTransition;
+	private Transition fadeInTransition;
+
 	// Fonts
 	private TrueTypeFont font1;
 	private TrueTypeFont font2;
@@ -47,9 +56,8 @@ public class MainScreenGameState extends BasicGameState
 		this.game = game;
 		this.backgroundImage = new Image("backgroundImages/mainMenuBackground.png");
 		this.backgroundMusic = new Music("music/Strike the Earth.ogg");
-		this.selectionSound = new Sound("sounds/selection_sound.ogg");
+		this.selectionSound = new Sound("sounds/selection_sound_2.ogg");
 		this.validationSound = new Sound("sounds/Metal_Slug_Okay.ogg");
-		backgroundMusic.loop(1f, 0.2f);
 
 		try
 		{
@@ -107,6 +115,20 @@ public class MainScreenGameState extends BasicGameState
 
 	}
 
+	@Override
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException
+	{
+		backgroundMusic.loop(1f, 0.2f);
+		fadeOutTransition = new FadeOutTransition();
+		fadeInTransition = new FadeInTransition();
+	}
+
+	@Override
+	public void leave(GameContainer container, StateBasedGame game) throws SlickException
+	{
+		backgroundMusic.stop();
+	}
+
 	public void keyReleased(int key, char c)
 	{
 		switch (key)
@@ -119,6 +141,9 @@ public class MainScreenGameState extends BasicGameState
 			if (liste.getListe().get(2).isSelected())
 			{
 				container.exit();
+			} else if (liste.getListe().get(0).isSelected())
+			{
+				game.enterState(BattleScreenGameState.ID, fadeOutTransition, fadeInTransition);
 			}
 
 			break;
@@ -135,11 +160,11 @@ public class MainScreenGameState extends BasicGameState
 
 			break;
 		case Input.KEY_DOWN:
-			selectionSound.play(1f, 0.1f);
+			selectionSound.play(1f, 0.4f);
 			liste.next();
 			break;
 		case Input.KEY_UP:
-			selectionSound.play(1f, 0.1f);
+			selectionSound.play(1f, 0.4f);
 			liste.previous();
 			break;
 

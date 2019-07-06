@@ -33,7 +33,7 @@ public class ElementADessiner
 		if (selected)
 		{
 			g.setColor(Color.yellow);
-			g.drawRect(posX - 10, posY - 10, 180, 40);
+			g.drawRect(posX - 10, posY - 10, 182, 40);
 			g.drawString(texte, posX, posY);
 		} else
 		{
