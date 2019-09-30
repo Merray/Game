@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019 DGFiP - Tous droits réservés
+ */
 package utils;
 
 import java.io.BufferedReader;
@@ -7,11 +10,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import entites.battle.player.BattlePlayer;
 import entites.battle.player.Job;
-import entites.battle.player.Perso;
 
 /**
- * Class LesFormulesUtils DOCUMENTEZ_MOI.
+ * Class LesFormulesUtils .
  */
 public class LesFormulesUtils
 {
@@ -30,7 +33,7 @@ public class LesFormulesUtils
 	}
 
 	/**
-	 * methode Creates the map
+	 * methode Creates the map.
 	 *
 	 * @return map
 	 */
@@ -48,6 +51,11 @@ public class LesFormulesUtils
 
 	}
 
+	/**
+	 * methode Charge map : .
+	 *
+	 * @return map
+	 */
 	private static Map<Integer, PaireHPMP> chargeMap()
 	{
 		Map<Integer, PaireHPMP> retour = new HashMap<Integer, PaireHPMP>();
@@ -86,7 +94,7 @@ public class LesFormulesUtils
 	 *
 	 * @param perso le nouveau new strength
 	 */
-	public static void setNewStrength(Perso perso)
+	public static void setNewStrength(BattlePlayer perso)
 	{
 		Job job = perso.getJob();
 
@@ -100,7 +108,7 @@ public class LesFormulesUtils
 	 *
 	 * @param perso le nouveau new magic
 	 */
-	public static void setNewMagic(Perso perso)
+	public static void setNewMagic(BattlePlayer perso)
 	{
 		Job job = perso.getJob();
 
@@ -114,7 +122,7 @@ public class LesFormulesUtils
 	 *
 	 * @param perso le nouveau new spirit
 	 */
-	public static void setNewSpirit(Perso perso)
+	public static void setNewSpirit(BattlePlayer perso)
 	{
 		Job job = perso.getJob();
 
@@ -128,7 +136,7 @@ public class LesFormulesUtils
 	 *
 	 * @param perso le nouveau new speed
 	 */
-	public static void setNewSpeed(Perso perso)
+	public static void setNewSpeed(BattlePlayer perso)
 	{
 		Job job = perso.getJob();
 
@@ -138,23 +146,32 @@ public class LesFormulesUtils
 	}
 
 	/**
-	 * methode Calcul max HP
+	 * methode Calcul max HP.
 	 *
 	 * @param perso
+	 * @param setCurrentHP
 	 * @return integer
 	 */
-	public static void setNewMaxHPAndMaxMP(Perso perso)
+	public static void setNewMaxHPAndMaxMP(BattlePlayer perso, boolean setCurrentHP)
 	{
 		PaireHPMP paireHPMP = HP_MP_MAP.get(perso.getLevel());
 
 		// HP
 		Integer newMaxHP = perso.getStrength() * paireHPMP.getHp() / 50;
 		perso.setMaxHP(newMaxHP);
-		perso.setCurrentHP(newMaxHP);
+
+		if (setCurrentHP)
+		{
+			perso.setCurrentHP(newMaxHP);
+		}
 
 		// MP
 		Integer newMaxMP = perso.getMagic() * paireHPMP.getMp() / 100;
 		perso.setMaxMP(newMaxMP);
-		perso.setCurrentMP(newMaxMP);
+
+		if (setCurrentHP)
+		{
+			perso.setCurrentMP(newMaxMP);
+		}
 	}
 }
