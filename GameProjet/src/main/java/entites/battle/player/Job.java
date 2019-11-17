@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2019 DGFiP - Tous droits réservés
- */
 package entites.battle.player;
 
 import entites.items.equipment.PlayerEquipment;

@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2019 DGFiP - Tous droits réservés
- */
 package utils;
 
 import java.io.BufferedReader;
@@ -9,7 +6,10 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import entites.battle.player.BattleEntity;
+import entites.battle.player.BattleMonster;
 import entites.battle.player.BattlePlayer;
 import entites.battle.player.Job;
 
@@ -22,6 +22,8 @@ public class LesFormulesUtils
 	/** Constant : HP_MP_MAP. */
 	private static final Map<Integer, PaireHPMP> HP_MP_MAP = chargeMap();
 
+	private static final Random RAND_NUMBER = new Random();
+
 	/**
 	 * Instanciation de les formules utils.
 	 */
@@ -29,25 +31,6 @@ public class LesFormulesUtils
 	{
 		// Constructeur vide
 		super();
-
-	}
-
-	/**
-	 * methode Creates the map.
-	 *
-	 * @return map
-	 */
-	private static Map<Integer, PaireHPMP> createMap()
-	{
-		Map<Integer, PaireHPMP> retour = new HashMap<Integer, PaireHPMP>();
-
-		retour.put(1, new PaireHPMP(250, 200));
-		retour.put(2, new PaireHPMP(314, 206));
-		retour.put(3, new PaireHPMP(382, 212));
-		retour.put(4, new PaireHPMP(454, 219));
-		retour.put(5, new PaireHPMP(530, 226));
-
-		return Collections.unmodifiableMap(retour);
 
 	}
 
@@ -78,11 +61,115 @@ public class LesFormulesUtils
 
 		} catch (IOException e)
 		{
+			/*
+			 * A logger plus tard
+			 */
 			e.printStackTrace();
 		}
 
 		return Collections.unmodifiableMap(retour);
 
+	}
+
+	/**
+	 * Partie Attaque physique
+	 */
+
+	public static Integer normalAttack(BattleEntity attacker, BattleEntity target)
+	{
+		Integer base = 0;
+		Integer bonus = 0;
+
+		// Base la même pour tous
+		base = attacker.getAttack() - target.getDefense();
+
+		/*
+		 * Si plus de défense que d'attaque
+		 */
+		if (base < 0)
+		{
+			base = 0;
+		}
+
+		if (base != 0)
+		{
+			/*
+			 * Monstre qui attaque
+			 */
+			if (attacker instanceof BattleMonster)
+			{
+				bonus = attacker.getStrength()
+						+ valeurAleatoire((attacker.getLevel() + attacker.getStrength()) / 4 + 2);
+			}
+			/*
+			 * Si le joueur attaque
+			 */
+			else
+			{
+				bonus = attacker.getStrength()
+						+ valeurAleatoire((attacker.getLevel() + attacker.getStrength()) / 8 + 2);
+			}
+		}
+
+		return base * bonus;
+	}
+
+	public static boolean isCriticalHit(BattleEntity attacker)
+	{
+
+		Integer critChance;
+		boolean isCrit = false;
+
+		/*
+		 * Evaluation des chances de crit
+		 */
+
+		critChance = attacker.getSpirit() / 4;
+
+		/*
+		 * Test de crit
+		 */
+		if ((RAND_NUMBER.nextInt(100) + 1) <= critChance)
+		{
+			isCrit = true;
+		}
+
+		return isCrit;
+
+	}
+
+	/*
+	 * Retourne true si l'attaque ne touche pas: 1% de chance de rater
+	 */
+	public static boolean isNotHitting()
+	{
+
+		return (RAND_NUMBER.nextInt(100) + 1) == 100;
+	}
+
+	/*
+	 * Retourne true si la cible esquive : basé sur l'évasion
+	 */
+	public static boolean isEvading(BattleEntity target)
+	{
+		return (RAND_NUMBER.nextInt(100) + 1) <= target.getEvasion();
+	}
+
+	/*
+	 * Retourne true si la cible contre attaque : basé sur l'esprit
+	 */
+	public static boolean isCounterAttacking(BattleEntity target)
+	{
+		/*
+		 * les monstres ne contrent pas pour le moment
+		 */
+		if (target instanceof BattleMonster)
+		{
+			return false;
+		} else
+		{
+			return (RAND_NUMBER.nextInt(100) + 1) <= ((BattlePlayer) target).getSpirit();
+		}
 	}
 
 	/*
@@ -146,13 +233,12 @@ public class LesFormulesUtils
 	}
 
 	/**
-	 * methode Calcul max HP.
+	 * methode Calcul max HP et MP.
 	 *
 	 * @param perso
-	 * @param setCurrentHP
-	 * @return integer
+	 * @param refillHPMP
 	 */
-	public static void setNewMaxHPAndMaxMP(BattlePlayer perso, boolean setCurrentHP)
+	public static void setNewMaxHPAndMaxMP(BattlePlayer perso, boolean refillHPMP)
 	{
 		PaireHPMP paireHPMP = HP_MP_MAP.get(perso.getLevel());
 
@@ -160,18 +246,40 @@ public class LesFormulesUtils
 		Integer newMaxHP = perso.getStrength() * paireHPMP.getHp() / 50;
 		perso.setMaxHP(newMaxHP);
 
-		if (setCurrentHP)
-		{
-			perso.setCurrentHP(newMaxHP);
-		}
-
 		// MP
 		Integer newMaxMP = perso.getMagic() * paireHPMP.getMp() / 100;
 		perso.setMaxMP(newMaxMP);
 
-		if (setCurrentHP)
+		// Refill les HP et MP
+		if (refillHPMP)
 		{
+			perso.setCurrentHP(newMaxHP);
 			perso.setCurrentMP(newMaxMP);
 		}
+	}
+
+	/*
+	 * Fait gagner un/des niveau(x) au joueur
+	 */
+	public static void levelUp(BattlePlayer target, Integer nbLevels)
+	{
+		target.setLevel(target.getLevel() + nbLevels);
+
+		/*
+		 * Recalcul des stats en fonction du nouveau niveau
+		 */
+		target.calculDesStatsPrincipales(true);
+	}
+
+	/*
+	 * Retourne une valeur aléatoire entre 0 et la valeur inclue
+	 */
+	private static Integer valeurAleatoire(Integer valeur)
+	{
+
+		Random rand = new Random();
+
+		return rand.nextInt(valeur + 1);
+
 	}
 }
