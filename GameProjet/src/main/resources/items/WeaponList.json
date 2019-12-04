@@ -1,0 +1,31 @@
+{
+    "weapons": [
+        {
+            "name": "Fists",
+            "cost": 0,
+            "weaponType": "NONE",
+            "attack": "0",
+            "element": "Aucun",
+            "status": "aucun"
+            
+        },
+        {
+            "name": "Dagger",
+            "cost": 320,
+            "weaponType": "DAGGER",
+            "attack": "12",
+            "element": "Aucun",
+            "status": "aucun"
+            
+        },
+                {
+            "name": "Broadsword",
+            "cost": 330,
+            "weaponType": "BROADSWORD",
+            "attack": "12",
+            "element": "Aucun",
+            "status": "aucun"
+            
+        }
+    ]
+}

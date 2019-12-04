@@ -1,0 +1,19 @@
+{
+    "lightArmors": [
+            {
+            "name": "Simple shirt",
+            "cost": 0,
+            "defense": 0,
+            "magicDefense": 0,
+            "lightArmorType": "NONE"
+        },
+        {
+            "name": "Leather shirt",
+            "cost": 270,
+            "defense": 6,
+            "magicDefense": 0,
+            "lightArmorType": "LEATHER SHIRT"
+        }  
+     
+    ]
+}

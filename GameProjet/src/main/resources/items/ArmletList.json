@@ -1,0 +1,19 @@
+{
+    "armlets": [
+        {
+            "name": "Bare hands",
+            "cost": 0,
+            "evasion": 0,
+            "magicEvasion": 9,
+            "armletType": "NONE"
+        },  
+        {
+            "name": "Jade armlet",
+            "cost": 3400,
+            "evasion": 0,
+            "magicEvasion": 29,
+            "armletType": "JADE ARMLET"
+        }  
+     
+    ]
+}

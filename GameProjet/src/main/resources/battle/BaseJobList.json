@@ -1,0 +1,21 @@
+{
+   "baseJobs":[
+      {
+         "name":"Voleur",
+         "baseJobType": "ROGUE",
+         "baseStrength":21,
+         "baseMagic":18,
+         "baseSpirit":23,
+         "baseSpeed":23,
+         "baseEquipment":{
+            "weaponType":"DAGGER",
+            "hatType":"LEATHER HAT",
+            "helmetType":"NONE",
+            "lightArmorType":"LEATHER SHIRT",
+            "heavyArmorType":"NONE",
+            "armletType":"JADE ARMLET",
+            "gauntletType":"NONE"
+         }
+      }
+   ]
+}

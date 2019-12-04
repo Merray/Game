@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import entites.battle.BattleEntity;
 import entites.battle.battlefield.BattleFields;
-import entites.battle.player.BattleEntity;
-import entites.battle.player.BattleMonster;
-import entites.battle.player.BattlePlayer;
+import entites.battle.monsters.BattleMonster;
+import entites.battle.players.BattlePlayer;
 import utils.LesFormulesUtils;
 
 public class Battle
@@ -72,7 +72,12 @@ public class Battle
 	{
 		System.out.println("\nAttack order: " + attackOrder);
 
+		System.out.println("\nGroupe:" + playerGroup);
+
+		System.out.println("\nEnnemis:" + enemyGroup);
+
 		System.out.println("\nTour de: " + activeEntity);
+
 	}
 
 	/*
@@ -149,7 +154,7 @@ public class Battle
 		endOfBattle();
 
 		/*
-		 * Retourner à l'écran map ici TODO
+		 * Retourner à l'écran map ici
 		 */
 
 	}
@@ -158,12 +163,12 @@ public class Battle
 	{
 		if (playersAlive <= 0)
 		{
-			System.out.println("\nLe groupe a été défait. Game Over.");
+			System.out.println("\nLe groupe a été défait. Game Over.\n");
 		} else if (monstersAlive <= 0)
 		{
 			System.out.println("\nLe groupe a vaincu les méchants.");
 
-			System.out.println("\nLoot en cours...");
+			System.out.println("\nLoot en cours...\n");
 		}
 
 	}
@@ -180,9 +185,11 @@ public class Battle
 			if (target instanceof BattlePlayer)
 			{
 				playersAlive -= 1;
+				playerGroup.remove(target);
 			} else
 			{
 				monstersAlive -= 1;
+				enemyGroup.remove(target);
 			}
 			attackOrder.remove(target);
 			System.out.println(target + " est KO !");

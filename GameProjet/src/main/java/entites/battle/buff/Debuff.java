@@ -1,7 +1,10 @@
 package entites.battle.buff;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum Debuff
 {
+	@JsonProperty("aucun")
 	AUCUN(null, null, null, 0, 0), FEU(" prend feu !", " n'est plus en feu !", " souffre de brûlure", 1, 4),
 	POISON(" sent un poison couler dans ses veines !", " sent le poison s'estomper", " souffre du poison", 2, 2),
 	LETHAL_POISON(" sent un poison létal couler dans ses veines !", " sent le poison létal s'estomper",

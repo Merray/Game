@@ -1,0 +1,44 @@
+{
+  "monsters": [
+    {
+      "name": "Goblin",
+      "monsterType": "GOBLIN",
+      "level": 5,
+      "moneyDropped": 88,
+      "xpDropped": 23,
+      "maxHP": 33,
+      "currentHP": 33,
+      "maxMP": 172,
+      "currentMP": 172,
+      "strength": 8,
+      "magic": 8,
+      "spirit": 10,
+      "speed": 19,
+      "attack": 8,
+      "defense": 10,
+      "evasion": 2,
+      "magicDefense": 10,
+      "magicEvasion": 3
+    },
+    {
+      "name": "Araignée",
+      "monsterType": "ARAIGNEE",
+      "level": 3,
+      "moneyDropped": 153,
+      "xpDropped": 32,
+      "maxHP": 123,
+      "currentHP": 123,
+      "maxMP": 199,
+      "currentMP": 199,
+      "strength": 8,
+      "magic": 8,
+      "spirit": 11,
+      "speed": 19,
+      "attack": 10,
+      "defense": 10,
+      "evasion": 2,
+      "magicDefense": 10,
+      "magicEvasion": 3
+    }
+  ]
+}

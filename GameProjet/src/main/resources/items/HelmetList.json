@@ -1,0 +1,16 @@
+{
+    "helmets": [
+        {
+            "name": "Hair",
+            "cost": 0,
+            "magicDefense": 0,      
+            "helmetType": "NONE"
+        },
+        {
+            "name": "Rubber helmet",
+            "cost": 250,
+            "magicDefense": 5,      
+            "helmetType": "RUBBER HELM"
+        }
+    ]
+}

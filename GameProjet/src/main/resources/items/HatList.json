@@ -1,0 +1,21 @@
+{
+    "hats": [
+        {
+            "name": "Hair",
+            "cost": 0,
+            "defense": 0,
+            "evasion": 0,
+            "magicDefense": 0,
+            "hatType": "NONE"
+        },  
+        {
+            "name": "Leather hat",
+            "cost": 150,
+            "defense": 0,
+            "evasion": 0,
+            "magicDefense": 6,
+            "hatType": "LEATHER HAT"
+        }  
+     
+    ]
+}

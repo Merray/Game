@@ -1,0 +1,37 @@
+{
+  "monsterTitles": [
+    {
+      "prefix": "",
+      "suffix": "",
+      "weaponSkin": "cheminSpriteSheet",
+      "levelModifier": 0,
+      "maxHpModifier": 0,
+      "strengthModifier": 0,
+      "magicModifier": 0,
+      "spiritModifier": 0,
+      "speedModifier": 0
+    },
+    {
+      "prefix": "",
+      "suffix": "Macabre",
+      "weaponSkin": "cheminSpriteSheet",
+      "levelModifier": 1,
+      "maxHpModifier": 30,
+      "strengthModifier": 10,
+      "magicModifier": 0,
+      "spiritModifier": -10,
+      "speedModifier": -10
+    },
+    {
+      "prefix": "Super",
+      "suffix": "",
+      "weaponSkin": "cheminSpriteSheet2",
+      "levelModifier": 5,
+      "maxHpModifier": 50,
+      "strengthModifier": 35,
+      "magicModifier": 0,
+      "spiritModifier": 40,
+      "speedModifier": 20
+    }
+  ]
+}

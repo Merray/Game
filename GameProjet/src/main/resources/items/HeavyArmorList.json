@@ -1,0 +1,19 @@
+{
+    "heavyArmors": [
+        {
+            "name": "Simple shirt",
+            "cost": 0,
+            "defense": 0,
+            "magicDefense": 0,
+            "heavyArmorType": "NONE"
+        },  
+        {
+            "name": "Bronze armor",
+            "cost": 650,
+            "defense": 9,
+            "magicDefense": 0,
+            "heavyArmorType": "BRONZE ARMOR"
+        }  
+     
+    ]
+}

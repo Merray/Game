@@ -1,17 +1,23 @@
 package entites.items.equipment;
 
-import entites.battle.player.BattlePlayer;
+import entites.battle.players.BattlePlayer;
 import entites.items.Item;
 
-public interface Equipment extends Item
+public abstract class Equipment extends Item
 {
 
-	public String getName();
+    public Equipment()
+    {
+        super();
 
-	public void applyStats(BattlePlayer target);
+    }
 
-	// public void loosenStats(Perso target);
+    public Equipment(String name, Integer cost)
+    {
+        super(name, cost);
 
-	public Integer getCost();
+    }
+
+    public abstract void applyStats(BattlePlayer target);
 
 }

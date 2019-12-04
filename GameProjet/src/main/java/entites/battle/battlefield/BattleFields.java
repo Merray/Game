@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
-import entites.battle.player.BattleMonster;
-import entites.battle.player.Monsters;
+import entites.battle.monsters.BattleMonster;
+import entites.battle.monsters.BattleMonsterFactory;
+import entites.battle.monsters.MonsterTypeEnum;
 
 public class BattleFields
 {
@@ -42,7 +44,7 @@ public class BattleFields
 
 	}
 
-	private void randMonsterFormation()
+	public void randMonsterFormation()
 	{
 		Random random = new Random();
 		String splitCaracter = "-";
@@ -64,6 +66,14 @@ public class BattleFields
 			}
 
 		}
+		/*
+		 * Attribution d'un titre
+		 */
+		for (BattleMonster monster : monsterFormation)
+		{
+			BattleMonsterFactory.applyTitle(monster);
+		}
+
 	}
 
 	private void buildPossibleFormations()
@@ -110,9 +120,9 @@ public class BattleFields
 
 		for (String stringMonster : stringFormation)
 		{
-			Monsters enumMonster = Monsters.valueOf(stringMonster);
+			MonsterTypeEnum enumMonster = MonsterTypeEnum.valueOf(stringMonster);
 
-			BattleMonster battleMonster = new BattleMonster(enumMonster);
+			BattleMonster battleMonster = BattleMonsterFactory.createBattleMonster(enumMonster);
 
 			retour.add(battleMonster);
 		}
@@ -205,7 +215,7 @@ public class BattleFields
 	 *
 	 * @return possibleFormations
 	 */
-	public HashMap<String, List<BattleMonster>> getPossibleFormations()
+	public Map<String, List<BattleMonster>> getPossibleFormations()
 	{
 		return possibleFormations;
 	}
@@ -215,9 +225,9 @@ public class BattleFields
 	 *
 	 * @param possibleFormations possibleFormations
 	 */
-	public void setPossibleFormations(HashMap<String, List<BattleMonster>> possibleFormations)
+	public void setPossibleFormations(Map<String, List<BattleMonster>> possibleFormations)
 	{
-		this.possibleFormations = possibleFormations;
+		this.possibleFormations = (HashMap<String, List<BattleMonster>>) possibleFormations;
 	}
 
 }

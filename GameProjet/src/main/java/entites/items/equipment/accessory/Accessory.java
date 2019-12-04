@@ -2,7 +2,7 @@ package entites.items.equipment.accessory;
 
 import entites.items.equipment.Equipment;
 
-public interface Accessory extends Equipment
+public abstract class Accessory extends Equipment
 {
 
 }

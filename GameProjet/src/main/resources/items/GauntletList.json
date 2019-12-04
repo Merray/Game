@@ -1,0 +1,19 @@
+{
+    "gauntlets": [
+        {
+            "name": "Bare hand",
+            "cost": 0,
+            "evasion": 8,
+            "magicEvasion": 2,
+            "gauntletType": "NONE"
+        },  
+        {
+            "name": "Bronze gauntlet",
+            "cost": 480,
+            "evasion": 8,
+            "magicEvasion": 2,
+            "gauntletType": "BRONZE GAUNTLET"
+        }  
+     
+    ]
+}
