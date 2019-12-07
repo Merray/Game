@@ -5,6 +5,7 @@ import java.awt.FontFormatException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,6 +13,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -33,6 +35,9 @@ public class BattleScreenGameState extends BasicGameState
 	private Image backgroundImage;
 	private Image enemy;
 	private Image perso;
+
+	private Animation anim;
+	private float xAnim;
 
 	// Sons/Musiques
 	private Music backgroundMusic;
@@ -73,6 +78,15 @@ public class BattleScreenGameState extends BasicGameState
 			e.printStackTrace();
 		}
 
+		SpriteSheet spriteSheet = new SpriteSheet("sprites/First_Animation.png", 64, 64);
+		anim = new Animation();
+		anim.addFrame(spriteSheet.getSprite(0, 0).getScaledCopy(2), 100);
+		anim.addFrame(spriteSheet.getSprite(1, 0).getScaledCopy(2), 100);
+		anim.addFrame(spriteSheet.getSprite(2, 0).getScaledCopy(2), 100);
+		anim.addFrame(spriteSheet.getSprite(3, 0).getScaledCopy(2), 100);
+		anim.addFrame(spriteSheet.getSprite(4, 0).getScaledCopy(2), 100);
+		anim.addFrame(spriteSheet.getSprite(5, 0).getScaledCopy(2), 100);
+
 	}
 
 	@Override
@@ -81,6 +95,8 @@ public class BattleScreenGameState extends BasicGameState
 		this.backgroundImage.draw(0, 0, container.getWidth(), container.getHeight());
 		this.enemy.drawCentered(container.getWidth() * 3 / 4, container.getHeight() / 2);
 		this.perso.drawCentered(container.getWidth() * 1 / 4, container.getHeight() / 2);
+
+		g.drawAnimation(anim, xAnim, 50);
 
 		g.setColor(Color.white);
 		g.setFont(font2);
@@ -91,7 +107,7 @@ public class BattleScreenGameState extends BasicGameState
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException
 	{
-
+		xAnim += 0.1f;
 	}
 
 	@Override
@@ -99,6 +115,7 @@ public class BattleScreenGameState extends BasicGameState
 	{
 		backgroundMusic.loop(1f, 0.2f);
 		transition = new HorizontalSplitTransition();
+		xAnim = 50f;
 	}
 
 	@Override

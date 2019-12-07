@@ -32,6 +32,7 @@ public class MainScreenGameState extends BasicGameState
 
 	// Images/Sprites
 	private Image backgroundImage;
+	private Image HUDImage;
 
 	// Sons/Musiques
 	private Music backgroundMusic;
@@ -44,8 +45,8 @@ public class MainScreenGameState extends BasicGameState
 	private Transition fadeInTransition;
 
 	// Fonts
-	private TrueTypeFont font1;
-	private TrueTypeFont font2;
+	private TrueTypeFont normalTrueTypeFont;
+	private TrueTypeFont titleTrueTypeFont;
 
 	// Liste des éléments
 	private ListeMenu liste;
@@ -54,20 +55,24 @@ public class MainScreenGameState extends BasicGameState
 	{
 		this.container = container;
 		this.game = game;
-		this.backgroundImage = new Image("backgroundImages/mainMenuBackground.png");
+		this.backgroundImage = new Image("backgroundImages/mainScreenBackground2.png");
+		this.HUDImage = new Image("backgroundImages/Titre_HUD_105%.png");
 		this.backgroundMusic = new Music("music/Strike the Earth.ogg");
 		this.selectionSound = new Sound("sounds/selection_sound_2.ogg");
 		this.validationSound = new Sound("sounds/Metal_Slug_Okay.ogg");
 
+		/*
+		 * La font
+		 */
 		try
 		{
 			InputStream inputStream = ResourceLoader.getResourceAsStream("fonts/SuperMario256.ttf");
-			Font laFont;
-			laFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			Font laGrosseFont = laFont.deriveFont(50f); // set font size
-			laFont = laFont.deriveFont(24f); // set font size
-			font1 = new TrueTypeFont(laGrosseFont, false);
-			font2 = new TrueTypeFont(laFont, false);
+			Font laFont = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(24f);
+			Font laGrosseFont = laFont.deriveFont(50f);
+
+			this.normalTrueTypeFont = new TrueTypeFont(laGrosseFont, false);
+			this.titleTrueTypeFont = new TrueTypeFont(laFont, false);
+
 		} catch (FontFormatException e)
 		{
 
@@ -78,6 +83,9 @@ public class MainScreenGameState extends BasicGameState
 			e.printStackTrace();
 		}
 
+		/*
+		 * Création de la liste du menu
+		 */
 		liste = new ListeMenu();
 		liste.ajouter(new ElementADessiner("New Game", 300, 450, true));
 		liste.ajouter(new ElementADessiner(" Options  ", 300, 500, false));
@@ -87,19 +95,31 @@ public class MainScreenGameState extends BasicGameState
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
 	{
+		/*
+		 * Dessin de l'image de fond
+		 */
 		this.backgroundImage.draw(0, 0, container.getWidth(), container.getHeight());
+		HUDImage.draw(110, 165, HUDImage.getWidth(), HUDImage.getHeight());
 
-		g.setFont(font1);
-		g.setColor(Color.red);
+		/*
+		 * Titre du jeu
+		 */
+		g.setFont(normalTrueTypeFont);
+		g.setColor(Color.blue);
 		g.drawString("LE JEU : The Game", 125, 175);
-		g.setFont(font2);
-		g.setColor(Color.white);
+
+		/*
+		 * Le reste
+		 */
+		g.setFont(titleTrueTypeFont);
+		g.setColor(Color.black);
 		g.drawString("Press P to pause or resume music", 150, 300);
 		g.drawString("Arrow keys to navigate", 220, 335);
 		g.drawString("Enter to confirm choice", 220, 370);
 
-		liste.draw(g);
-
+		/*
+		 * Dessin ON/OFF en fonction de la musique
+		 */
 		if (musicOn)
 		{
 			g.drawString("Music : ON", container.getHeight() - 10, 15);
@@ -107,6 +127,11 @@ public class MainScreenGameState extends BasicGameState
 		{
 			g.drawString("Music : OFF", container.getHeight() - 10, 15);
 		}
+
+		/*
+		 * On dessine la liste à la fin
+		 */
+		liste.draw(g);
 
 	}
 
