@@ -105,9 +105,13 @@ public class BattleScreenGameState extends BasicGameState
 	}
 
 	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException
+	public void update(GameContainer container, StateBasedGame arg1, int arg2) throws SlickException
 	{
 		xAnim += 0.1f;
+		if (xAnim > container.getWidth())
+		{
+			xAnim -= container.getWidth() - 20f;
+		}
 	}
 
 	@Override
